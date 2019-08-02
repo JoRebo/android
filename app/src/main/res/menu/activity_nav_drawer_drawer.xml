@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/inicio"
+            android:icon="@drawable/ic_star_border_black_24dp"
+            android:title="@string/inicio" />
+        <item
+            android:id="@+id/emision"
+            android:icon="@drawable/ic_star_border_black_24dp"
+            android:title="@string/emision" />
+        <item
+            android:id="@+id/reporte"
+            android:icon="@drawable/ic_star_border_black_24dp"
+            android:title="@string/reporte" />
+
+    </group>
+
+    <item
+        android:id="@+id/nav_share"
+        android:title="@string/configuracion" />
+
+</menu>

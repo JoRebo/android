@@ -5,4 +5,6 @@
     <color name="colorAccent">#e4f0fb</color>
     <color name="fondo">#e4f1fd</color>
     <color name="colorBar">#FFFFFF</color>
+    <color name="greenButton">#369723</color>
+
 </resources>

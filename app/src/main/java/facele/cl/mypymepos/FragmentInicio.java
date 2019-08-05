@@ -35,6 +35,12 @@ public class FragmentInicio extends Fragment {
             startActivity(intent);
         });
 
+        LinearLayout perfil = myFragmentView.findViewById(R.id.layout_perfil);
+        perfil.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), Perfil.class);
+            startActivity(intent);
+        });
+
         return myFragmentView;
     }
 

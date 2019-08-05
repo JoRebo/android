@@ -82,7 +82,8 @@ public class NavDrawer extends AppCompatActivity
         } else if (id == R.id.reporte) {
 
         } else if (id == R.id.configuracion) {
-
+            Intent intent = new Intent(this, Perfil.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

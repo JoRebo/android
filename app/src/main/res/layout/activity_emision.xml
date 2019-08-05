@@ -282,7 +282,7 @@
                         android:layout_rowWeight="0"
                         android:layout_gravity="fill"
                         android:layout_rowSpan="2"
-                        android:backgroundTint="#449C49"
+                        android:backgroundTint="@color/greenButton"
                         android:text="Generar Boleta Electronica"
                         android:drawableBottom="@drawable/icono_emitir"
                         android:textAlignment="center"

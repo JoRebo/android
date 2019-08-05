@@ -36,14 +36,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="6">
+            android:weightSum="10">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="13dp"
-                android:layout_weight="1"
+                android:layout_weight="1.8"
                 android:orientation="vertical">
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -83,131 +84,154 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="5dp"
-                android:layout_weight="5">
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:layout_marginHorizontal="13dp"
+
+                >
 
                 <GridLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="top"
+
+
+                    android:alignmentMode="alignBounds"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:columnCount="4"
-                    android:orientation="horizontal"
-                    android:padding="0dp"
                     android:rowCount="6">
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="C"
                         android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:textSize="40dp" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
-                        android:textSize="50dp"
+                        android:textSize="40dp"
                         android:textColor="#FFFF"
                         android:text="(" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
-                        android:textSize="50dp"
+                        android:textSize="40dp"
                         android:textColor="#FFFF"
                         android:text=")" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:textAllCaps="false"
                         android:textColor="#FFFF"
-                        android:textSize="50dp"
                         android:drawableLeft="@drawable/icono_borrar"
                         android:paddingLeft="25dp"/>
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="7"
                         android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:textSize="40dp" />
 
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="8"
                         android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:textSize="40dp" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="9"
                         android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:textSize="40dp" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:text="+"
                         android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:textSize="40dp" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="4"
                         android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:textSize="40dp" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:text="5"
                         android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:textSize="40dp" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="6"
                         android:textColor="#FFFF"
-                        android:textSize="50dp"/>
+                        android:textSize="40dp"/>
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:textAllCaps="false"
                         android:textColor="#FFFF"
@@ -216,40 +240,48 @@
                         android:paddingLeft="25dp"/>
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="1"
                         android:textColor="#FFFF"
-                        android:textSize="50dp"/>
+                        android:textSize="40dp"/>
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="2"
                         android:textColor="#FFFF"
-                        android:textSize="50dp"/>
+                        android:textSize="40dp"/>
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="3"
                         android:textColor="#FFFF"
-                        android:textSize="50dp"/>
+                        android:textSize="40dp"/>
 
                     <Button
                         android:layout_width="99dp"
-                        android:layout_rowSpan="2"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="0"
                         android:layout_gravity="fill"
-                        android:layout_margin="2dp"
+                        android:layout_rowSpan="2"
                         android:backgroundTint="#449C49"
                         android:text="Generar Boleta Electronica"
                         android:drawableBottom="@drawable/icono_emitir"
@@ -259,34 +291,40 @@
                         android:textSize="15dp" />
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text=","
                         android:textColor="#FFFF"
-                        android:textSize="50dp"/>
+                        android:textSize="40dp"/>
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="0"
                         android:textColor="#FFFF"
-                        android:textSize="50dp"/>
+                        android:textSize="40dp"/>
 
                     <Button
-                        android:layout_width="99dp"
-                        android:layout_height="99dp"
+                        android:layout_height="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
                         android:textStyle="bold"
                         android:text="-"
                         android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:textSize="40dp" />
 
 
                 </GridLayout>

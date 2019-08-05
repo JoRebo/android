@@ -1,12 +1,14 @@
 package facele.cl.mypymepos;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 public class FragmentInicio extends Fragment {
 
@@ -26,6 +28,13 @@ public class FragmentInicio extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myFragmentView = inflater.inflate(R.layout.fragment_inicio, container, false);
+
+        LinearLayout emision = myFragmentView.findViewById(R.id.layout_emision);
+        emision.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), Emision.class);
+            startActivity(intent);
+        });
+
         return myFragmentView;
     }
 

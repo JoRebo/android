@@ -1,5 +1,6 @@
 package facele.cl.mypymepos;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -70,9 +71,14 @@ public class NavDrawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.inicio) {
-
+            getSupportActionBar().setTitle("INICIO");
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new FragmentInicio())
+                    .addToBackStack(null)
+                    .commit();
         } else if (id == R.id.emision) {
-
+            Intent intent = new Intent(this, Emision.class);
+            startActivity(intent);
         } else if (id == R.id.reporte) {
 
         } else if (id == R.id.configuracion) {

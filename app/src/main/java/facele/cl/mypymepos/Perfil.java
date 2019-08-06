@@ -1,9 +1,11 @@
 package facele.cl.mypymepos;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class Perfil extends AppCompatActivity {
 
@@ -16,6 +18,13 @@ public class Perfil extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("PERFIL");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Button cambiarContrasena = findViewById(R.id.cambiarContraseña);
+
+        cambiarContrasena.setOnClickListener(view -> {
+            Intent intent = new Intent(this, CambiarContrasena.class);
+            startActivity(intent);
+        });
     }
 
     @Override

@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class NavDrawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FragmentInicio.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentInicio.OnFragmentInteractionListener, FragmentReporte.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +71,18 @@ public class NavDrawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.inicio) {
-            getSupportActionBar().setTitle("INICIO");
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new FragmentInicio())
-                    .addToBackStack(null)
+                    .addToBackStack("INICIO")
                     .commit();
         } else if (id == R.id.emision) {
             Intent intent = new Intent(this, Emision.class);
             startActivity(intent);
         } else if (id == R.id.reporte) {
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new FragmentReporte())
+                    .addToBackStack("REPORTE")
+                    .commit();
         } else if (id == R.id.configuracion) {
             Intent intent = new Intent(this, Perfil.class);
             startActivity(intent);
@@ -94,5 +96,9 @@ public class NavDrawer extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
         //you can leave it empty
+    }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }

@@ -1,21 +1,20 @@
 package facele.cl.mypymepos;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 
-public class FragmentInicio extends Fragment {
 
+public class FragmentReporte extends Fragment {
     private OnFragmentInteractionListener mListener;
     private View myFragmentView;
 
-    public FragmentInicio() {
+    public FragmentReporte() {
         // Required empty public constructor
     }
 
@@ -27,31 +26,22 @@ public class FragmentInicio extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        myFragmentView = inflater.inflate(R.layout.fragment_inicio, container, false);
+        myFragmentView = inflater.inflate(R.layout.fragment_reporte, container, false);
+        ((NavDrawer) getActivity()).setActionBarTitle("REPORTE");
 
-        ((NavDrawer) getActivity()).setActionBarTitle("INICIO");
-
-        LinearLayout emision = myFragmentView.findViewById(R.id.layout_emision);
-        emision.setOnClickListener(view -> {
-            Intent intent = new Intent(getContext(), Emision.class);
-            startActivity(intent);
-        });
-
-        LinearLayout perfil = myFragmentView.findViewById(R.id.layout_perfil);
-        perfil.setOnClickListener(view -> {
-            Intent intent = new Intent(getContext(), Perfil.class);
-            startActivity(intent);
-          });
-          
-        LinearLayout reporte = myFragmentView.findViewById(R.id.layout_reporte);
-        reporte.setOnClickListener(view -> {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new FragmentReporte())
-                    .addToBackStack("REPORTE")
-                    .commit();
-        });
+        String[] titulos = {"Reporte Ventas", "Reportes por Sucursal"};
+        MyListAdapter adapter = new MyListAdapter(this.getActivity(), titulos);
+        ListView listaReporte = myFragmentView.findViewById(R.id.lista_reportes);
+        listaReporte.setAdapter(adapter);
 
         return myFragmentView;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
     }
 
     @Override
@@ -72,7 +62,6 @@ public class FragmentInicio extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

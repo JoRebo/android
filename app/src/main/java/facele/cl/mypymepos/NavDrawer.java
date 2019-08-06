@@ -84,7 +84,8 @@ public class NavDrawer extends AppCompatActivity
                     .addToBackStack("REPORTE")
                     .commit();
         } else if (id == R.id.configuracion) {
-
+            Intent intent = new Intent(this, Perfil.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

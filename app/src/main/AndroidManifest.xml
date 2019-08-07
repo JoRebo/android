@@ -14,7 +14,7 @@
             android:name=".NavDrawer"
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Emision" />
+        <activity android:name=".Emision"></activity>
         <activity android:name=".CambiarContrasena" />
         <activity android:name=".Login">
             <intent-filter>

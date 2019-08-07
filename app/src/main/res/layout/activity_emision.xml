@@ -53,15 +53,21 @@
                     android:textAllCaps="true"
                     android:textColor="#5B79E7" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/operacion"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="5dp"
-                    android:background="#fff" />
+                    android:background="#fff"
+                    android:gravity="bottom|end"
+                    android:padding="7dp"
+                    android:scrollbars="vertical"
+                    android:text="0" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp">
+                    android:layout_height="30dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="86dp"
@@ -73,10 +79,17 @@
                         android:textColor="#5B79E7"
                         android:textSize="19dp" />
 
-                    <EditText
-                        android:layout_width="300dp"
-                        android:layout_height="30dp"
-                        android:background="#fff" />
+                    <TextView
+                        android:id="@+id/resultado"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffff"
+                        android:baselineAligned="false"
+                        android:gravity="end"
+                        android:paddingRight="10dp"
+                        android:text="0"
+                        android:textColor="#5B79E7"
+                        android:textSize="19dp" />
 
                 </LinearLayout>
 
@@ -85,206 +98,222 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="7"
                 android:layout_marginHorizontal="13dp"
+                android:layout_weight="7"
 
                 >
 
                 <GridLayout
 
 
-                    android:alignmentMode="alignBounds"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:alignmentMode="alignBounds"
                     android:columnCount="4"
                     android:rowCount="6">
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="vaciar"
                         android:text="C"
                         android:textColor="#FFFF"
-                        android:textSize="40dp" />
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
-                        android:textSize="40dp"
+                        android:onClick="abrirParentesis"
+                        android:text="("
                         android:textColor="#FFFF"
-                        android:text="(" />
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
-                        android:textSize="40dp"
+                        android:onClick="cerrarParentesis"
+                        android:text=")"
                         android:textColor="#FFFF"
-                        android:text=")" />
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
+                        android:id="@+id/btn_borrar"
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFF"
                         android:drawableLeft="@drawable/icono_borrar"
-                        android:paddingLeft="25dp"/>
+                        android:paddingLeft="25dp"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFF" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="siete"
                         android:text="7"
                         android:textColor="#FFFF"
-                        android:textSize="40dp" />
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="ocho"
                         android:text="8"
                         android:textColor="#FFFF"
-                        android:textSize="40dp" />
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="nueve"
                         android:text="9"
                         android:textColor="#FFFF"
-                        android:textSize="40dp" />
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
+                        android:onClick="mas"
                         android:text="+"
                         android:textColor="#FFFF"
                         android:textSize="40dp" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="cuatro"
                         android:text="4"
                         android:textColor="#FFFF"
-                        android:textSize="40dp" />
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
+                        android:onClick="cinco"
                         android:text="5"
                         android:textColor="#FFFF"
                         android:textSize="40dp" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="seis"
                         android:text="6"
                         android:textColor="#FFFF"
-                        android:textSize="40dp"/>
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
+                        android:drawableLeft="@drawable/icono_multiplicar"
+                        android:onClick="por"
+                        android:paddingLeft="25dp"
                         android:textAllCaps="false"
                         android:textColor="#FFFF"
-                        android:textSize="50dp"
-                        android:drawableLeft="@drawable/icono_multiplicar"
-                        android:paddingLeft="25dp"/>
+                        android:textSize="50dp" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="uno"
                         android:text="1"
                         android:textColor="#FFFF"
-                        android:textSize="40dp"/>
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="dos"
                         android:text="2"
                         android:textColor="#FFFF"
-                        android:textSize="40dp"/>
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="tres"
                         android:text="3"
                         android:textColor="#FFFF"
-                        android:textSize="40dp"/>
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_width="99dp"
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
-                        android:layout_rowWeight="0"
-                        android:layout_gravity="fill"
                         android:layout_rowSpan="2"
+                        android:layout_rowWeight="0"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
                         android:backgroundTint="@color/greenButton"
-                        android:text="Generar Boleta Electronica"
                         android:drawableBottom="@drawable/icono_emitir"
+                        android:onClick="emitir"
+                        android:text="Generar Boleta Electronica"
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="#FFFF"
@@ -292,39 +321,42 @@
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="coma"
                         android:text=","
                         android:textColor="#FFFF"
-                        android:textSize="40dp"/>
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="cero"
                         android:text="0"
                         android:textColor="#FFFF"
-                        android:textSize="40dp"/>
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:layout_height="0dp"
-                        android:layout_columnWeight="1"
                         android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
                         android:layout_gravity="fill"
                         android:backgroundTint="#F7639DCF"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:textStyle="bold"
+                        android:onClick="menos"
                         android:text="-"
                         android:textColor="#FFFF"
-                        android:textSize="40dp" />
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
 
                 </GridLayout>

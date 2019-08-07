@@ -36,13 +36,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="10">
+            android:weightSum="11">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_margin="13dp"
-                android:layout_weight="1.8"
+                android:paddingTop="13dp"
+                android:paddingRight="13dp"
+                android:paddingLeft="13dp"
+                android:layout_weight="3"
                 android:orientation="vertical">
 
 
@@ -98,14 +100,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_weight="7"
-
-                >
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:paddingBottom="13dp"
+                android:layout_weight="8">
 
                 <GridLayout
-
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alignmentMode="alignBounds"
@@ -113,6 +113,7 @@
                     android:rowCount="6">
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -126,6 +127,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -139,6 +141,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -151,19 +154,35 @@
                         android:textSize="40dp"
                         android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/btn_borrar"
+                    <RelativeLayout
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
                         android:layout_gravity="fill"
-                        android:backgroundTint="#F7639DCF"
-                        android:drawableLeft="@drawable/icono_borrar"
-                        android:paddingLeft="25dp"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFF" />
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_borrar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="#F7639DCF"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFF" />
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:padding="19dp"
+                            android:scaleType="centerInside"
+                            android:elevation="12dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/icono_borrar" />
+
+                    </RelativeLayout>
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -178,6 +197,7 @@
 
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -191,6 +211,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -204,6 +225,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -215,6 +237,7 @@
                         android:textSize="40dp" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -228,6 +251,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -239,6 +263,7 @@
                         android:textSize="40dp" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -251,20 +276,34 @@
                         android:textSize="40dp"
                         android:textStyle="bold" />
 
-                    <Button
+                    <RelativeLayout
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
                         android:layout_gravity="fill"
-                        android:backgroundTint="#F7639DCF"
-                        android:drawableLeft="@drawable/icono_multiplicar"
-                        android:onClick="por"
-                        android:paddingLeft="25dp"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFF"
-                        android:textSize="50dp" />
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="#F7639DCF"
+                            android:onClick="por"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFF" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:padding="19dp"
+                            android:scaleType="centerInside"
+                            android:elevation="12dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/icono_multiplicar" />
+
+                    </RelativeLayout>
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -278,6 +317,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -291,6 +331,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -303,23 +344,53 @@
                         android:textSize="40dp"
                         android:textStyle="bold" />
 
-                    <Button
-                        android:layout_width="99dp"
+                    <RelativeLayout
+                        android:onClick="emitir"
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowSpan="2"
                         android:layout_rowWeight="0"
                         android:layout_columnWeight="1"
-                        android:layout_gravity="fill"
-                        android:backgroundTint="@color/greenButton"
-                        android:drawableBottom="@drawable/icono_emitir"
-                        android:onClick="emitir"
-                        android:text="Generar Boleta Electronica"
-                        android:textAlignment="center"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFF"
-                        android:textSize="15dp" />
+                        android:layout_gravity="fill">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/greenButton"
+                            android:onClick="emitir"
+                            android:textAlignment="center"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFF"
+                            android:textSize="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:elevation="12dp"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#fff"
+                                android:textAlignment="center"
+                                android:textSize="10sp"
+                                android:text="Generar Boleta Electrónica"
+                                android:layout_marginBottom="10dp" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/icono_emitir"
+                                android:layout_gravity="center" />
+                        </LinearLayout>
+                    </RelativeLayout>
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -333,6 +404,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -346,6 +418,7 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"

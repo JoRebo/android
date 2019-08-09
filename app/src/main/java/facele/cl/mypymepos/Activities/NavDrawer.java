@@ -1,4 +1,4 @@
-package facele.cl.mypymepos;
+package facele.cl.mypymepos.Activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import facele.cl.mypymepos.Fragments.FragmentInicio;
+import facele.cl.mypymepos.Fragments.FragmentReporte;
+import facele.cl.mypymepos.R;
 
 public class NavDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentInicio.OnFragmentInteractionListener, FragmentReporte.OnFragmentInteractionListener {

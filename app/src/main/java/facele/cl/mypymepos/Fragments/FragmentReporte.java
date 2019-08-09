@@ -1,4 +1,4 @@
-package facele.cl.mypymepos;
+package facele.cl.mypymepos.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,6 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import facele.cl.mypymepos.Activities.NavDrawer;
+import facele.cl.mypymepos.Adapters.MyListAdapter;
+import facele.cl.mypymepos.R;
 
 
 public class FragmentReporte extends Fragment {

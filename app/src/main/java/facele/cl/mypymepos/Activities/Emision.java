@@ -69,7 +69,11 @@ public class Emision extends AppCompatActivity {
             Log.e("SDKAPI", "Dispositivo no soportado");
         }
 
-        usuario = new Usuario();
+        SharedPreferences mPrefs = getSharedPreferences("Storage", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("usuario", "failed");
+        Log.d("json", json);
+        usuario = gson.fromJson(json, Usuario.class);
 
         setContentView(R.layout.activity_emision);
 
@@ -204,11 +208,6 @@ public class Emision extends AppCompatActivity {
                     Impresora impresora = new Impresora(context);
                     Resources res = getResources();
 
-                    SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
-                    Gson gson = new Gson();
-                    String json = mPrefs.getString("usuario", "");
-                    Usuario usuario = gson.fromJson(json, Usuario.class);
-
                     Drawable drawableTED = res.getDrawable(R.drawable.sample_barcode);
                     Bitmap bitmap = ((BitmapDrawable) drawableTED).getBitmap();
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -243,6 +242,7 @@ public class Emision extends AppCompatActivity {
                 leds.shutdown();
                 loading.dismiss();
                 Toast.makeText(Emision.this, "Error de conexion al servidor", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
             }
         });
     }

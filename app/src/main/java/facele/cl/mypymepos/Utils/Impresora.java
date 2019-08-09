@@ -21,11 +21,13 @@ public class Impresora {
         }
 
         isBusy = true;
-
-        Bitmap bmlogo;
-        bmlogo = BitmapFactory.decodeByteArray(logo, 0, logo.length);
-        sdk.setPrnBitmap(bmlogo, 1);
-
+        if (logo != null) {
+            Bitmap bmlogo;
+            bmlogo = BitmapFactory.decodeByteArray(logo, 0, logo.length);
+            sdk.setPrnBitmap(bmlogo, 1);
+        } else {
+            sdk.setPrnText("------------------------------", 1, 1);
+        }
         sdk.setPrnText("\n", 1, 1);
         sdk.setPrnText(nombreEmisor, 3, 1);
         sdk.setPrnText("Rut:       " + rutEmisor, 1, 0);

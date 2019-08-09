@@ -1,4 +1,4 @@
-package facele.cl.mypymepos;
+package facele.cl.mypymepos.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import facele.cl.mypymepos.Activities.Emision;
+import facele.cl.mypymepos.Activities.NavDrawer;
+import facele.cl.mypymepos.Activities.Perfil;
+import facele.cl.mypymepos.R;
 
 public class FragmentInicio extends Fragment {
 

@@ -1,4 +1,4 @@
-package facele.cl.mypymepos;
+package facele.cl.mypymepos.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import facele.cl.mypymepos.R;
 
 public class MyListAdapter extends ArrayAdapter<String> {
 

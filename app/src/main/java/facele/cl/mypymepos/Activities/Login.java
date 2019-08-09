@@ -1,15 +1,20 @@
-package facele.cl.mypymepos;
+package facele.cl.mypymepos.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
+import facele.cl.mypymepos.R;
+
 public class Login extends AppCompatActivity {
+    public static Context baseContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        baseContext = getBaseContext();
 
         setContentView(R.layout.activity_login);
 

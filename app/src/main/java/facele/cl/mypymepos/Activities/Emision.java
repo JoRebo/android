@@ -1,8 +1,15 @@
-package facele.cl.mypymepos;
+package facele.cl.mypymepos.Activities;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,24 +22,53 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.udojava.evalex.Expression;
 
+import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Objects;
 
+import facele.cl.mypymepos.Conexiones.ApiCliente;
+import facele.cl.mypymepos.Modelo.RESTEmision;
+import facele.cl.mypymepos.Modelo.RESTError;
+import facele.cl.mypymepos.Modelo.Usuario;
+import facele.cl.mypymepos.R;
+import facele.cl.mypymepos.Utils.GeneradorXML;
+import facele.cl.mypymepos.Utils.Impresora;
+import facele.cl.mypymepos.Utils.SDKAPI;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Emision extends AppCompatActivity {
 
-    TextView operacion;
-    TextView resultado;
-    String mensajeError = "Syntax error";
+    private TextView operacion;
+    private TextView resultado;
+    private String mensajeError = "Syntax error";
+    private Usuario usuario;
+    private SDKAPI sdkapi;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this.getApplicationContext();
+
+        try {
+            sdkapi = SDKAPI.getInstance();
+        } catch (NoClassDefFoundError e) {
+            Log.e("SDKAPI", "Dispositivo no soportado");
+        }
+
+        usuario = new Usuario();
 
         setContentView(R.layout.activity_emision);
 
@@ -112,7 +148,7 @@ public class Emision extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.setTitle(title);
         dialog.setMessage(message);
-
+        dialog.setCancelable(false);
         dialog.setOnShowListener(arg0 -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark)));
 
         dialog.show();
@@ -122,9 +158,92 @@ public class Emision extends AppCompatActivity {
         calcularResultado(true);
         if (resultado.getText().toString().equals(mensajeError)) {
             dialogConstructor("Error", "No se puede emitir la boleta ya que existen errores de cálculo");
+            return;
         } else if (operacion.getText().toString().equals("0")) {
             dialogConstructor("Error", "Debe ingresar una operación");
+            return;
         }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton("Confirmar", (dialog, id) -> enviarEmision());
+        builder.setNegativeButton("Cancelar", (dialog, id) -> {
+
+        });
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setTitle("Confirmar");
+        dialog.setMessage("¿Está seguro de emitir una boleta por $" + resultado.getText().toString() + "?");
+
+        dialog.setOnShowListener(arg0 -> {
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        });
+
+        dialog.show();
+    }
+
+
+    private void enviarEmision() {
+        Leds leds = new Leds();
+        Thread th = new Thread(leds);
+        th.start();
+
+        final ProgressDialog loading = ProgressDialog.show(this, "Cargando", "Espere...", false, false);
+
+        RequestBody requestBody = RequestBody.create(new GeneradorXML().obtenerInputEmisionCrear(operacion.getText().toString(), resultado.getText().toString().replace(".", "")), MediaType.parse("text/plain"));
+        Call<RESTEmision> call = ApiCliente.get().doEmitir(usuario.getAbonadoIdentificacion(), usuario.getDatafonoIdentificacion(), usuario.getVendedorEmail(), requestBody);
+        call.enqueue(new Callback<RESTEmision>() {
+
+            @Override
+            public void onResponse(@NonNull Call<RESTEmision> call, @NonNull Response<RESTEmision> response) {
+                loading.dismiss();
+                leds.shutdown();
+
+                try {
+                    Impresora impresora = new Impresora(context);
+                    Resources res = getResources();
+                    Drawable drawableLogo = res.getDrawable(R.drawable.logo_facele);
+                    Bitmap bitmap = ((BitmapDrawable) drawableLogo).getBitmap();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] logo = stream.toByteArray();
+
+                    Drawable drawableTED = res.getDrawable(R.drawable.sample_barcode);
+                    bitmap = ((BitmapDrawable) drawableTED).getBitmap();
+                    stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] ted = stream.toByteArray();
+                    impresora.imprimir("Facele SPA", "76.001.565-2", "Boleta Electronica", "1234", "17.726.389-3", "Cliente boleta", "Venta", "$" + resultado.getText().toString(), logo, ted);
+                } catch (NoClassDefFoundError e) {
+                    Log.e("SDKAPI", "Dispositivo no soportado");
+                }
+
+
+                if (response.isSuccessful()) {
+                    //TODO exito
+                    Log.d("emision", "correcta");
+
+                } else {
+                    try {
+                        assert response.errorBody() != null;
+                        RESTError restError = new Gson().fromJson(response.errorBody().string(), RESTError.class);
+                        dialogConstructor("Error", restError.getMessage());
+                    } catch (Exception e) {
+                        //TODO caso que no pueda deserializar error
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RESTEmision> call, @NonNull Throwable t) {
+                //TODO error de conexion
+                leds.shutdown();
+                loading.dismiss();
+                Toast.makeText(Emision.this, "Error de conexion al servidor", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void borrar() {
@@ -289,17 +408,13 @@ public class Emision extends AppCompatActivity {
     public void formatearNumeros() {
         try {
             String ecuacion = operacion.getText().toString();
-            Log.d("ecuacion", ecuacion);
 
             String[] separadoPorEspacios = ecuacion.split(" ");
             String ultimoEspacio = separadoPorEspacios[separadoPorEspacios.length - 1];
-            Log.d("ultimoEspacio", ultimoEspacio);
 
             String[] separadoPorParentesis = ultimoEspacio.split("[(]");
-            Log.d(separadoPorParentesis.length + "", "aa");
             if (separadoPorParentesis.length != 0) {
                 String ultimoParentesis = separadoPorParentesis[separadoPorParentesis.length - 1];
-                Log.d("ultimoParentesis", ultimoParentesis);
                 ultimoParentesis = formatoMiles(ultimoParentesis.replace(".", ""));
                 separadoPorParentesis[separadoPorParentesis.length - 1] = ultimoParentesis;
                 String joinParentesis = join("(", separadoPorParentesis);
@@ -374,6 +489,62 @@ public class Emision extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public class Leds implements Runnable {
+        private volatile boolean shutdown;
+
+        public void run() {
+            while (!shutdown) {
+                try {
+                    sdkapi.setLEDStatus((byte) 1, (byte) 1, (byte) 1, (byte) 200);
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    sdkapi.setLEDStatus((byte) 1, (byte) 0, (byte) 1, (byte) 200);
+
+                    sdkapi.setLEDStatus((byte) 2, (byte) 1, (byte) 1, (byte) 200);
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    sdkapi.setLEDStatus((byte) 2, (byte) 0, (byte) 1, (byte) 200);
+
+                    sdkapi.setLEDStatus((byte) 4, (byte) 1, (byte) 1, (byte) 200);
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    sdkapi.setLEDStatus((byte) 4, (byte) 0, (byte) 1, (byte) 200);
+
+                    sdkapi.setLEDStatus((byte) 8, (byte) 1, (byte) 1, (byte) 200);
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                    sdkapi.setLEDStatus((byte) 1, (byte) 0, (byte) 1, (byte) 200);
+                    sdkapi.setLEDStatus((byte) 2, (byte) 0, (byte) 1, (byte) 200);
+                    sdkapi.setLEDStatus((byte) 4, (byte) 0, (byte) 1, (byte) 200);
+                    sdkapi.setLEDStatus((byte) 8, (byte) 0, (byte) 1, (byte) 200);
+                } catch (NullPointerException e) {
+                    Log.e("SDKAPI", "Dispositivo no soportado");
+                }
+            }
+        }
+
+        public void shutdown() {
+            shutdown = true;
+        }
     }
 }
 

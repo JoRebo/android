@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 public class Usuario implements Serializable {
 
-    private String abonadoIdentificacion = "17726389-3";
-    private int datafonoIdentificacion = 1234123;
-    private String vendedorEmail = "vendedor@vendedor.cl";
+    private String abonadoIdentificacion;
+    private int datafonoIdentificacion;
+    private String vendedorEmail;
+    private byte[] logo = null;
+    private String nombre;
+    private String rut;
 
     public String getVendedorEmail() {
         return vendedorEmail;
@@ -30,5 +33,29 @@ public class Usuario implements Serializable {
 
     public void setDatafonoIdentificacion(int datafonoIdentificacion) {
         this.datafonoIdentificacion = datafonoIdentificacion;
+    }
+
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 }

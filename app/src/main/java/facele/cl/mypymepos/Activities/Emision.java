@@ -3,6 +3,7 @@ package facele.cl.mypymepos.Activities;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -202,18 +203,18 @@ public class Emision extends AppCompatActivity {
                 try {
                     Impresora impresora = new Impresora(context);
                     Resources res = getResources();
-                    Drawable drawableLogo = res.getDrawable(R.drawable.logo_facele);
-                    Bitmap bitmap = ((BitmapDrawable) drawableLogo).getBitmap();
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                    byte[] logo = stream.toByteArray();
+
+                    SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+                    Gson gson = new Gson();
+                    String json = mPrefs.getString("usuario", "");
+                    Usuario usuario = gson.fromJson(json, Usuario.class);
 
                     Drawable drawableTED = res.getDrawable(R.drawable.sample_barcode);
-                    bitmap = ((BitmapDrawable) drawableTED).getBitmap();
-                    stream = new ByteArrayOutputStream();
+                    Bitmap bitmap = ((BitmapDrawable) drawableTED).getBitmap();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                     byte[] ted = stream.toByteArray();
-                    impresora.imprimir("Facele SPA", "76.001.565-2", "Boleta Electronica", "1234", "17.726.389-3", "Cliente boleta", "Venta", "$" + resultado.getText().toString(), logo, ted);
+                    impresora.imprimir(usuario.getNombre(), usuario.getRut(), "Boleta Electronica", "1234", "66.666.666-6", "Cliente boleta", "Venta", "$" + resultado.getText().toString(), usuario.getLogo(), ted);
                 } catch (NoClassDefFoundError e) {
                     Log.e("SDKAPI", "Dispositivo no soportado");
                 }

@@ -4,10 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -28,7 +25,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.udojava.evalex.Expression;
 
-import java.io.ByteArrayOutputStream;
+import org.json.JSONObject;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -37,7 +35,7 @@ import java.util.Objects;
 
 import facele.cl.mypymepos.Conexiones.ApiCliente;
 import facele.cl.mypymepos.Modelo.RESTEmision;
-import facele.cl.mypymepos.Modelo.RESTError;
+import facele.cl.mypymepos.Modelo.RESTEmisionObtener;
 import facele.cl.mypymepos.Modelo.Usuario;
 import facele.cl.mypymepos.R;
 import facele.cl.mypymepos.Utils.GeneradorXML;
@@ -57,6 +55,7 @@ public class Emision extends AppCompatActivity {
     private Usuario usuario;
     private SDKAPI sdkapi;
     private Context context;
+    private Leds leds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,6 @@ public class Emision extends AppCompatActivity {
         String json = mPrefs.getString("usuario", "failed");
         Log.d("json", json);
         usuario = gson.fromJson(json, Usuario.class);
-
         setContentView(R.layout.activity_emision);
 
         Toolbar toolbar = findViewById(R.id.toolbarActivity);
@@ -189,47 +187,34 @@ public class Emision extends AppCompatActivity {
 
 
     private void enviarEmision() {
-        Leds leds = new Leds();
+        leds = new Leds();
         Thread th = new Thread(leds);
         th.start();
 
         final ProgressDialog loading = ProgressDialog.show(this, "Cargando", "Espere...", false, false);
 
         RequestBody requestBody = RequestBody.create(new GeneradorXML().obtenerInputEmisionCrear(operacion.getText().toString(), resultado.getText().toString().replace(".", "")), MediaType.parse("text/plain"));
-        Call<RESTEmision> call = ApiCliente.get().doEmitir(usuario.getAbonadoIdentificacion(), usuario.getDatafonoIdentificacion(), usuario.getVendedorEmail(), requestBody);
+        Call<RESTEmision> call = ApiCliente.get().postEmitir(usuario.getAbonadoIdentificacion(), usuario.getDatafonoIdentificacion(), usuario.getVendedorEmail(), requestBody);
         call.enqueue(new Callback<RESTEmision>() {
 
             @Override
             public void onResponse(@NonNull Call<RESTEmision> call, @NonNull Response<RESTEmision> response) {
                 loading.dismiss();
-                leds.shutdown();
-
-                try {
-                    Impresora impresora = new Impresora(context);
-                    Resources res = getResources();
-
-                    Drawable drawableTED = res.getDrawable(R.drawable.sample_barcode);
-                    Bitmap bitmap = ((BitmapDrawable) drawableTED).getBitmap();
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                    byte[] ted = stream.toByteArray();
-                    impresora.imprimir(usuario.getNombre(), usuario.getRut(), "Boleta Electronica", "1234", "66.666.666-6", "Cliente boleta", "Venta", "$" + resultado.getText().toString(), usuario.getLogo(), ted);
-                } catch (NoClassDefFoundError e) {
-                    Log.e("SDKAPI", "Dispositivo no soportado");
-                }
-
 
                 if (response.isSuccessful()) {
                     //TODO exito
-                    Log.d("emision", "correcta");
+                    obtenerTed(response.body().getId(), response.body().getFolioDTE() + "");
 
                 } else {
+                    leds.shutdown();
+                    Log.d("error", "1");
                     try {
-                        assert response.errorBody() != null;
-                        RESTError restError = new Gson().fromJson(response.errorBody().string(), RESTError.class);
-                        dialogConstructor("Error", restError.getMessage());
+                        JSONObject jObj = new JSONObject(response.errorBody().string());
+                        if (jObj.has("Message"))
+                            dialogConstructor("Error", jObj.getString("Message"));
+                        if (jObj.has("Error"))
+                            dialogConstructor("Error", jObj.getString("Error"));
                     } catch (Exception e) {
-                        //TODO caso que no pueda deserializar error
                         e.printStackTrace();
                     }
                 }
@@ -245,6 +230,62 @@ public class Emision extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
+
+    private void obtenerTed(Integer id, String folio) {
+
+        final ProgressDialog loading = ProgressDialog.show(this, "Cargando", "Espere...", false, false);
+
+        Call<RESTEmisionObtener> call = ApiCliente.get().getEmitir(usuario.getAbonadoIdentificacion(), id);
+        call.enqueue(new Callback<RESTEmisionObtener>() {
+
+            @Override
+            public void onResponse(@NonNull Call<RESTEmisionObtener> call, @NonNull Response<RESTEmisionObtener> response) {
+                loading.dismiss();
+                leds.shutdown();
+
+                if (response.isSuccessful()) {
+                    //TODO exito
+                    GeneradorXML generadorXML = new GeneradorXML();
+                    Bitmap tedbitmap = generadorXML.getTedFromBytes(response.body().getBytesXML());
+
+                    imprimir(tedbitmap, folio);
+
+                } else {
+                    Log.d("error", "1");
+                    try {
+                        JSONObject jObj = new JSONObject(response.errorBody().string());
+                        if (jObj.has("Message"))
+                            dialogConstructor("Error", jObj.getString("Message"));
+                        if (jObj.has("Error"))
+                            dialogConstructor("Error", jObj.getString("Error"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RESTEmisionObtener> call, @NonNull Throwable t) {
+                //TODO error de conexion
+                leds.shutdown();
+                loading.dismiss();
+                Toast.makeText(Emision.this, "Error de conexion al servidor", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void imprimir(Bitmap bitmap, String folio) {
+        try {
+            Impresora impresora = new Impresora(context);
+            impresora.imprimir(usuario.getNombre(), usuario.getRut(), "Boleta Electronica", folio, "66.666.666-6", "Cliente boleta", "Venta", "$" + resultado.getText().toString(), usuario.getLogo(), bitmap);
+        } catch (NoClassDefFoundError e) {
+            Log.e("SDKAPI", "Dispositivo no soportado");
+        }
+
+        Log.d("emision", "correcta");
     }
 
     public void borrar() {

@@ -13,13 +13,14 @@ public class Impresora {
     public Impresora(Context context) {
         sdk = SDKAPI.getInstance();
         this.context = context;
+        sdk.setPrnGray(0);
     }
 
-    public void imprimir(String nombreEmisor, String rutEmisor, String tipoDTE, String folio, String rutReceptor, String nombreReceptor, String venta, String monto, byte[] logo, byte[] ted) {
+    public void imprimir(String nombreEmisor, String rutEmisor, String tipoDTE, String folio, String rutReceptor, String nombreReceptor, String venta, String monto, byte[] logo, Bitmap ted) {
         if (isBusy) {
             return;
         }
-
+        sdk.initPrinter();
         isBusy = true;
         if (logo != null) {
             Bitmap bmlogo;
@@ -45,10 +46,8 @@ public class Impresora {
         sdk.setPrnText("------------------------------", 1, 1);
         sdk.startPrint();
 
-        Bitmap bmted;
-        bmted = BitmapFactory.decodeByteArray(ted, 0, ted.length);
-        sdk.setPrnBitmap(bmted, 1);
-        sdk.feedPaper(20, 0);
+        sdk.setPrnColorBitmap(ted, 0);
+        sdk.feedPaper(15, 0);
 
         isBusy = false;
 

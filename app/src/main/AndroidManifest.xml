@@ -3,6 +3,9 @@
     package="facele.cl.mypymepos">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +17,6 @@
         <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -24,7 +26,9 @@
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Emision" />
-        <activity android:name=".Activities.CambiarContrasena" />
+        <activity
+            android:name=".Activities.CambiarContrasena"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activities.Login"
             android:windowSoftInputMode="stateHidden">

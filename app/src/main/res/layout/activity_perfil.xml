@@ -7,13 +7,17 @@
     android:background="#FFFF"
     tools:context=".Activities.Perfil">
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="1dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.Toolbar
@@ -29,29 +33,38 @@
                     android:id="@+id/toolbar_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="20dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="20dp"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/content_logoToolbar"
                     android:src="@drawable/logo_facele" />
             </android.support.v7.widget.Toolbar>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@drawable/shadow" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-4dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:weightSum="10">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"></View>
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
                     android:src="@drawable/icono_perfil"
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="2dp"
@@ -62,10 +75,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Pedro Perez Paredes"
+                    android:text="@string/perfil_nombre"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="22dp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -74,68 +87,69 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="3dp"
-                    android:text="pperez@facele.cl"
+                    android:text="@string/perfil_email"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/cambiarContraseña"
                     android:layout_width="180dp"
-                    android:layout_height="25dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@color/greenButton"
-                    android:text="Cambiar Contraseña"
+                    android:text="@string/perfil_boton_contrasena"
                     android:textAllCaps="true"
                     android:textColor="#FFFF"
-                    android:textSize="13dp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:text="Empresa"
+                    android:text="@string/perfil_empresa"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="22dp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/abonadoNombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Facele S.P.A"
+                    android:text="@string/perfil_nombre_empresa"
                     android:textAllCaps="true"
                     android:textColor="@color/greenButton"
-                    android:textSize="22dp" />
+                    android:textSize="20sp" />
 
                 <TableLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp">
+                    android:layout_gravity="center">
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="18dp"
-                            android:text="RUT: "
+                            android:text="@string/perfil_rut"
                             android:textColor="@color/colorPrimary"
-                            />
+                            android:textSize="20sp" />
+
                         <TextView
                             android:id="@+id/abonadoIdentificacion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="18dp"
-                            android:text="76.001.565-2"
+                            android:text="@string/perfil_rut_numero"
                             android:textColor="@color/colorPrimary"
-                            />
+                            android:textSize="20sp" />
                     </TableRow>
                 </TableLayout>
 
@@ -145,159 +159,193 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:text="Habilitado para emitir"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/perfil_habilitado_emitir"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="22dp" />
+                    android:textSize="23sp" />
 
                 <TableLayout
                     android:id="@+id/tablaFolios"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="25dp"
+                    android:paddingBottom="45dp"
                     android:stretchColumns="1">
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp">
-                        <TextView
-                            android:text="Tipo DTE"
-                            android:textSize="18dp"
-                            android:layout_gravity="center"
-                            android:textColor="@color/colorPrimary"
-                            android:textAllCaps="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_column="1" />
 
                         <TextView
-                            android:text="Folios Disponibles"
-                            android:textSize="18dp"
-                            android:layout_gravity="right"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="2"/>
+                            android:layout_column="1"
+                            android:layout_gravity="center"
+                            android:text="@string/perfil_tipo_dte"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="2"
+                            android:layout_gravity="end"
+                            android:text="@string/perfil_folios_disponibles"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
-                            android:text="Boleta Afecta"
-                            android:textSize="18dp"
-                            android:textAllCaps="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="1" />
+                            android:layout_column="1"
+                            android:text="@string/perfil_boleta_afecta"
+                            android:textAllCaps="true"
+                            android:textColor="@color/greenButton"
+                            android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/foliosBoletaAfecta"
-                            android:text="1500"
-                            android:layout_gravity="right"
-                            android:textSize="18dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="2" />
+                            android:layout_column="2"
+                            android:layout_gravity="end"
+                            android:text="@string/perfil_test"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
-                            android:text="Factura Afecta"
-                            android:textSize="18dp"
-                            android:textAllCaps="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="1" />
+                            android:layout_column="1"
+                            android:text="@string/perfil_factura_afecta"
+                            android:textAllCaps="true"
+                            android:textColor="@color/greenButton"
+                            android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/foliosFacturaAfecta"
-                            android:text="100"
-                            android:layout_gravity="right"
-                            android:textSize="18dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="2" />
+                            android:layout_column="2"
+                            android:layout_gravity="end"
+                            android:text="@string/perfil_test"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
-                            android:text="Factura Exenta"
-                            android:textSize="18dp"
-                            android:textAllCaps="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="1" />
+                            android:layout_column="1"
+                            android:text="@string/perfil_factura_exenta"
+                            android:textAllCaps="true"
+                            android:textColor="@color/greenButton"
+                            android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/folisoFacturaExenta"
-                            android:text="0"
-                            android:layout_gravity="right"
-                            android:textSize="18dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="2" />
+                            android:layout_column="2"
+                            android:layout_gravity="end"
+                            android:text="@string/perfil_test"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
-                            android:text="Nota Crédito"
-                            android:textSize="18dp"
-                            android:textAllCaps="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="1" />
+                            android:layout_column="1"
+                            android:text="@string/perfil_nota_credito"
+                            android:textAllCaps="true"
+                            android:textColor="@color/greenButton"
+                            android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/folisoNotaCredito"
-                            android:text="10"
-                            android:layout_gravity="right"
-                            android:textSize="18dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="2" />
+                            android:layout_column="2"
+                            android:layout_gravity="end"
+                            android:text="@string/perfil_test"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
-                            android:text="Nota Débito"
-                            android:textSize="18dp"
-                            android:textAllCaps="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="1" />
+                            android:layout_column="1"
+                            android:text="@string/perfil_nota_debito"
+                            android:textAllCaps="true"
+                            android:textColor="@color/greenButton"
+                            android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/folisoNotaDebito"
-                            android:text="2"
-                            android:layout_gravity="right"
-                            android:textSize="18dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="2" />
+                            android:layout_column="2"
+                            android:layout_gravity="end"
+                            android:text="@string/perfil_test"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp" />
                     </TableRow>
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <TextView
-                            android:text="Guia Despacho"
-                            android:textSize="18dp"
-                            android:textAllCaps="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="1" />
+                            android:layout_column="1"
+                            android:text="@string/perfil_guia_despacho"
+                            android:textAllCaps="true"
+                            android:textColor="@color/greenButton"
+                            android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/folisGuiaDespacho"
-                            android:text="0"
-                            android:layout_gravity="right"
-                            android:textSize="18dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="2" />
+                            android:layout_column="2"
+                            android:layout_gravity="end"
+                            android:text="@string/perfil_test"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp" />
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>

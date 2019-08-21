@@ -22,4 +22,24 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="perfil">Perfil</string>
+    <string name="content_logoToolbar">LogoFacele</string>
+    <string name="perfil_nombre">Pedro Perez Paredes</string>
+    <string name="perfil_email">pperez@facele.cl</string>
+    <string name="perfil_boton_contrasena">Cambiar Contraseña</string>
+    <string name="perfil_empresa">Empresa</string>
+    <string name="perfil_nombre_empresa">Facele SPA</string>
+    <string name="perfil_rut">RUT:</string>
+    <string name="perfil_rut_numero">76.001.565-2</string>
+    <string name="perfil_habilitado_emitir">Habilitado para emitir</string>
+    <string name="perfil_tipo_dte">Tipo DTE</string>
+    <string name="perfil_folios_disponibles">Folios Disponibles</string>
+    <string name="perfil_boleta_afecta">Boleta Afecta</string>
+    <string name="perfil_test">9999</string>
+    <string name="perfil_factura_afecta">Factura Afecta</string>
+    <string name="perfil_factura_exenta">Factura Exenta</string>
+    <string name="perfil_nota_credito">Nota Crédito</string>
+    <string name="perfil_nota_debito">Nota Débito</string>
+    <string name="perfil_guia_despacho">Guia Despacho</string>
+    <string name="cc_contrasena_acutal">Contraseña actual</string>
+    <string name="cc_nueva_contrasena">Nueva contraseña</string>
 </resources>

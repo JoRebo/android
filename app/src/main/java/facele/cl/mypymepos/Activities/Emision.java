@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -19,6 +20,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +59,7 @@ public class Emision extends AppCompatActivity {
     private SDKAPI sdkapi;
     private Context context;
     private Leds leds;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +162,20 @@ public class Emision extends AppCompatActivity {
     }
 
     public void emitir(View view) {
+        LinearLayout container = new LinearLayout(this);
+        container.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(40, 0, 40, 0);
+        final EditText input = new EditText(Emision.this);
+        input.setLayoutParams(lp);
+        input.setGravity(android.view.Gravity.TOP | android.view.Gravity.LEFT);
+        input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        input.setLines(1);
+        input.setMaxLines(1);
+        input.setHint("Email cliente (Opcional)");
+        input.setHintTextColor(getResources().getColor(R.color.grey));
+        container.addView(input);
+
         calcularResultado(true);
         if (resultado.getText().toString().equals(mensajeError)) {
             dialogConstructor("Error", "No se puede emitir la boleta ya que existen errores de cálculo");
@@ -168,7 +186,10 @@ public class Emision extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setPositiveButton("Confirmar", (dialog, id) -> enviarEmision());
+        builder.setPositiveButton("Confirmar", (dialog, id) -> {
+            email = input.getText().toString();
+            enviarEmision();
+        });
         builder.setNegativeButton("Cancelar", (dialog, id) -> {
 
         });
@@ -176,6 +197,8 @@ public class Emision extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.setTitle("Confirmar");
         dialog.setMessage("¿Está seguro de emitir una boleta por $" + resultado.getText().toString() + "?");
+
+        dialog.setView(container);
 
         dialog.setOnShowListener(arg0 -> {
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));

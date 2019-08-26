@@ -2,6 +2,7 @@ package facele.cl.mypymepos.Conexiones;
 
 import facele.cl.mypymepos.Modelo.RESTEmision;
 import facele.cl.mypymepos.Modelo.RESTEmisionObtener;
+import facele.cl.mypymepos.Modelo.RestDatafonoObtener;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -27,6 +28,10 @@ public interface APIPlug {
     @GET("{abonadoIdentificacion}/emision/v10/{id}")
     Call<RESTEmisionObtener> getEmitir(@Path("abonadoIdentificacion") String abonadoIdentificacion,
                                        @Path("id") Integer emisionId);
+
+    @GET("{abonadoIdentificacion}/datafono/v10/{id}")
+    Call<RestDatafonoObtener> getDatafono(@Path("abonadoIdentificacion") String abonadoIdentificacion,
+                                          @Path("id") Integer datafonoId);
 
     //@GET("homerest")
     //Call<HomeRest> homerest(@Query("fcm") String fcm);

@@ -75,29 +75,36 @@ public class Login extends AppCompatActivity {
             }
             // ./If remember
 
-            // TODO corregir cuando haya autentication
-            Usuario usuario = new Usuario();
-            usuario.setAbonadoIdentificacion("18094908-9");
-            usuario.setDatafonoIdentificacion(1234);
-            usuario.setNombre(user.getText().toString());
+            int datafonoIdentificacion = mPrefs.getInt("datafonoIdentificacion", 0);
 
-            Drawable drawableTED = getResources().getDrawable(R.drawable.logo_facele_2);
-            Bitmap bitmap = ((BitmapDrawable) drawableTED).getBitmap();
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            byte[] logo = stream.toByteArray();
-            usuario.setLogo(logo);
+            if (datafonoIdentificacion == 0) {
+                Intent intent = new Intent(this, VincularDatafono.class);
+                startActivity(intent);
+                this.finish();
+            } else {
+                // TODO corregir cuando haya autentication
+                Usuario usuario = new Usuario();
+                usuario.setAbonadoIdentificacion("18094908-9");
+                usuario.setNombre(user.getText().toString());
 
-            usuario.setRut("76.001.565-2");
-            usuario.setVendedorEmail("testemail2@dominio.com");
-            Gson gson = new Gson();
-            String json = gson.toJson(usuario);
-            prefsEditor.putString("usuario", json);
-            prefsEditor.commit();
+                Drawable drawableTED = getResources().getDrawable(R.drawable.logo_facele_2);
+                Bitmap bitmap = ((BitmapDrawable) drawableTED).getBitmap();
+                usuario.setDatafonoIdentificacion(datafonoIdentificacion);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] logo = stream.toByteArray();
+                usuario.setLogo(logo);
 
-            Intent intent = new Intent(this, NavDrawer.class);
-            startActivity(intent);
-            this.finish();
+                usuario.setRut("76.001.565-2");
+                usuario.setVendedorEmail("testemail2@dominio.com");
+                Gson gson = new Gson();
+                String json = gson.toJson(usuario);
+                prefsEditor.putString("usuario", json);
+                prefsEditor.commit();
+                Intent intent = new Intent(this, NavDrawer.class);
+                startActivity(intent);
+                this.finish();
+            }
         });
     }
 

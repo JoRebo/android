@@ -16,28 +16,34 @@ public class Impresora {
         sdk.setPrnGray(0);
     }
 
-    public void imprimir(String nombreEmisor, String rutEmisor, String tipoDTE, String folio, String rutReceptor, String nombreReceptor, String venta, String monto, byte[] logo, Bitmap ted) {
+    public void imprimir(String abonadoIdentificacion, String razonSocialEmisor, String tipoDTE, String folio, String direccionCasaMatriz, String comunaCasaMatriz, String ciudadCasaMatriz, String direccionSucursal, String comunaSucursal, String ciudadSucursal, String codigoSucursal, String giro, String fechaEmision, String rutReceptor, String nombreReceptor, String venta, String monto, byte[] logo, Bitmap ted) {
         if (isBusy) {
             return;
         }
         sdk.initPrinter();
         isBusy = true;
+
+        sdk.setPrnText("------------------------------", 1, 1);
+        //sdk.setPrnText("\n", 1, 1);
+        sdk.setPrnText("R.U.T " + abonadoIdentificacion, 1, 1);
+        sdk.setPrnText(tipoDTE, 1, 1);
+        sdk.setPrnText("N° " + folio, 1, 1);
+        sdk.setPrnText("------------------------------", 1, 1);
+        sdk.startPrint();
         if (logo != null) {
             Bitmap bmlogo;
             bmlogo = BitmapFactory.decodeByteArray(logo, 0, logo.length);
             sdk.setPrnBitmap(bmlogo, 1);
-        } else {
-            sdk.setPrnText("------------------------------", 1, 1);
         }
-        sdk.setPrnText("\n", 1, 1);
-        sdk.setPrnText(nombreEmisor, 3, 1);
-        sdk.setPrnText("Rut:       " + rutEmisor, 1, 0);
-        sdk.setPrnText(tipoDTE, 1, 0);
-        sdk.setPrnText("Folio:     " + folio, 1, 0);
+        sdk.setPrnText(razonSocialEmisor, 1, 0);
+        sdk.setPrnText("Casa Matriz: " + direccionCasaMatriz + ", " + comunaCasaMatriz + ", " + ciudadCasaMatriz, 1, 0);
+        sdk.setPrnText("Sucursal: " + direccionSucursal + "," + comunaSucursal + ", " + ciudadSucursal, 1, 0);
+        sdk.setPrnText("Código Sucursal: " + codigoSucursal, 1, 0);
+        sdk.setPrnText("Giro: " + giro, 1, 0);
         sdk.setPrnText("------------------------------", 1, 1);
-        sdk.setPrnText("Receptor", 1, 1);
-        sdk.setPrnText("Rut:       " + rutReceptor, 1, 0);
-        sdk.setPrnText("R. social: " + nombreReceptor, 1, 0);
+        sdk.setPrnText("Receptor: " + nombreReceptor, 1, 1);
+        sdk.setPrnText("RUT:       " + rutReceptor, 1, 0);
+        sdk.setPrnText("Fecha Emisión: " + fechaEmision, 1, 0);
         sdk.setPrnText("------------------------------", 1, 1);
         sdk.setPrnText("Descripc    Cant    Precio", 1, 0);
         sdk.setPrnText(venta + "       1      " + monto, 1, 0);

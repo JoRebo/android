@@ -303,7 +303,9 @@ public class Emision extends AppCompatActivity {
     public void imprimir(Bitmap bitmap, String folio) {
         try {
             Impresora impresora = new Impresora(context);
-            impresora.imprimir(usuario.getNombre(), usuario.getRut(), "Boleta Electronica", folio, "66.666.666-6", "Cliente boleta", "Venta", "$" + resultado.getText().toString(), usuario.getLogo(), bitmap);
+
+            //TODO faltan campos!
+            //impresora.imprimir(usuario.getNombre(), usuario.getRut(), "Boleta Electronica", folio, "66.666.666-6", "Cliente boleta", "Venta", "$" + resultado.getText().toString(), usuario.getLogo(), bitmap);
         } catch (NoClassDefFoundError e) {
             Log.e("SDKAPI", "Dispositivo no soportado");
         }
